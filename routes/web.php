@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
@@ -15,20 +14,8 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ReparacionController;
 use App\Http\Controllers\SolicitudController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
+// Rutas web
 Route::view('/', 'welcome')->name('home');
-
 
 Route::resource('proveedors', ProveedorController::class);
 Route::resource('categorias', CategoriaController::class);
@@ -40,6 +27,10 @@ Route::resource('solicituds', SolicitudController::class);
 Route::resource('empleados', EmpleadoController::class);
 Route::resource('reparacions', ReparacionController::class);
 Route::resource('facturas', FacturaController::class);
+
+// Ruta para generar PDF
+// Cambia esto
+Route::get('facturas/{id}/pdf', [FacturaController::class, 'generatePDF'])->name('facturas.generatePDF');
 Route::resource('pagos', PagoController::class);
 
 Route::get('/dashboard', function () {

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Categoria;
 use App\Models\Producto;
+use App\Models\Proveedor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,6 +24,7 @@ class ProductoFactory extends Factory
             'descripcion' => fake()->text(),
             'precio' => fake()->numberBetween(10000, 500000),
             'categoria_id' => Categoria::inRandomOrder()->first()->id, // Asigna un id de categoría
+            'proveedor_id' => Proveedor::factory(),
         ];
     }
 }

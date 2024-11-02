@@ -12,10 +12,24 @@ class ProductoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::all();
-        return view('productos.index', compact('productos'));
+        $query = Producto::query();
+    
+        // Buscar por nombre
+        if ($request->filled('search')) {
+            $query->where('nombre', 'like', '%' . $request->search . '%');
+        }
+    
+        // Filtrar por categoría
+        if ($request->filled('categoria')) {
+            $query->where('categoria_id', $request->categoria);
+        }
+    
+        $productos = $query->get();
+        $categorias = Categoria::all(); // Asegúrate de tener el modelo de Categoría
+    
+        return view('productos.index', compact('productos', 'categorias'));
     }
 
     /**

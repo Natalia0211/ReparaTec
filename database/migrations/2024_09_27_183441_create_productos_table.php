@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('descripcion')->nullable();
             $table->decimal('precio', 10, 2);
             $table->foreignId('categoria_id')->constrained();
+            $table->foreignId('proveedor_id')->constrained();
             $table->timestamps();
         });
     }

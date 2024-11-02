@@ -9,12 +9,30 @@ use Illuminate\Http\Request;
 class DispositivoController extends Controller
 {
     // Mostrar lista de dispositivos
-    public function index()
+    public function index(Request $request)
     {
-        $dispositivos = Dispositivo::all();
-        return view('dispositivos.index', compact('dispositivos'));
-    }
+        $query = Dispositivo::query();
+    
+        // Filtrado por cliente
+        if ($request->filled('cliente_id')) {
+            $query->where('cliente_id', $request->cliente_id);
+        }
+    
+        // Filtrado por modelo
+        if ($request->filled('modelo')) {
+            $query->where('Modelo', 'like', '%' . $request->modelo . '%');
+        }
+    
+        // Obtener dispositivos filtrados
+        $dispositivos = $query->get();
+        
+        // Obtener todos los clientes
+        $clientes = Cliente::all(); 
 
+        // Pasar ambos a la vista
+        return view('dispositivos.index', compact('dispositivos', 'clientes'));
+    }
+    
     // Mostrar formulario para crear un nuevo dispositivo
     public function create()
     {

@@ -26,7 +26,7 @@
                     <select id="dispositivo_id" name="dispositivo_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
                         <option value="">Seleccione un dispositivo</option>
                         @foreach($dispositivos as $dispositivo)
-                            <option value="{{ $dispositivo->id }}">{{ $dispositivo->nombre }}</option>
+                            <option value="{{ $dispositivo->id }}">{{ $dispositivo->Marca }} - {{ $dispositivo->Modelo }} ({{ $dispositivo->IMEI }})</option>
                         @endforeach
                     </select>
                     @error('dispositivo_id')

@@ -26,20 +26,22 @@
                     <th>Dispositivo</th>
                     <th>Fecha Solicitud</th>
                     <th>Descripción del Problema</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($solicitudes as $solicitud)
+                @foreach ($solicituds as $solicitud)
                     <tr>
                         <td>{{ $solicitud->id }}</td>
                         <td>{{ $solicitud->cliente->nombre }} {{ $solicitud->cliente->apellidos }}</td>
-                        <td>{{ $solicitud->dispositivo->nombre }}</td>
-                        <td>{{ $solicitud->fecha_solicitud->format('d/m/Y H:i') }}</td>
-                        <td>{{ $solicitud->descripcion_problema }}</td>
+                        <td>{{ $solicitud->dispositivo ? $solicitud->dispositivo->Marca . ' - ' . $solicitud->dispositivo->Modelo : 'No asignado' }}</td>
+                        <td>{{ \Carbon\Carbon::parse($solicitud->fecha_solicitud)->format('d/m/Y H:i') }}</td>
+                        <td>{{ $solicitud->descripcion_problema }}</td> <!-- Mostrar descripción del problema -->
+                        <td>{{ $solicitud->estado }}</td>
                         <td class="flex space-x-2">
-                            <a href="{{ route('solicitudes.edit', $solicitud->id) }}" class="btn btn-warning btn-xs">Editar</a>
-                            <form action="{{ route('solicitudes.destroy', $solicitud->id) }}" method="POST" style="display:inline;">
+                            <a href="{{ route('solicituds.edit', $solicitud->id) }}" class="btn btn-warning btn-xs">Editar</a>
+                            <form action="{{ route('solicituds.destroy', $solicitud->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-error btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar esta solicitud?')">Eliminar</button>

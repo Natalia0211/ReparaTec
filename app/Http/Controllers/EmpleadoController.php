@@ -8,9 +8,15 @@ use Illuminate\Http\Request;
 class EmpleadoController extends Controller
 {
     // Método para mostrar la lista de empleados
-    public function index()
+    public function index(Request $request)
     {
-        $empleados = Empleado::all();
+        $search = $request->input('search'); // Obtener el término de búsqueda
+
+        $empleados = Empleado::when($search, function ($query) use ($search) {
+            $query->where('nombre', 'like', '%' . $search . '%')
+                  ->orWhere('cargo', 'like', '%' . $search . '%');
+        })->get(); // Filtrar según la búsqueda
+
         return view('empleados.index', compact('empleados'));
     }
 

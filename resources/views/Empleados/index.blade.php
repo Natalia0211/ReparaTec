@@ -11,9 +11,19 @@
         </div>
     @endif
 
-    {{-- Botón para crear un empleado nuevo --}}
-    <div class="flex justify-end m-4">
-        <a href="{{ route('empleados.create') }}" class="btn btn-outline btn-sm">Nuevo Empleado</a>
+    {{-- Formulario de búsqueda --}}
+    <div class="flex justify-between m-4">
+        <div>
+            <form action="{{ route('empleados.index') }}" method="GET" class="flex space-x-2">
+                <input type="text" name="search" placeholder="Buscar empleado o cargo" value="{{ request('search') }}"
+                    class="input input-bordered" />
+                <button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+            </form>
+        </div>
+        {{-- Botón para crear un empleado nuevo --}}
+        <div>
+            <a href="{{ route('empleados.create') }}" class="btn btn-outline btn-sm">Nuevo Empleado</a>
+        </div>
     </div>
 
     {{-- Tabla de empleados --}}

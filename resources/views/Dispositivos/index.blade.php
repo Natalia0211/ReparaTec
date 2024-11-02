@@ -11,8 +11,22 @@
         </div>
     @endif
 
-    {{-- Botón para crear un dispositivo nuevo --}}
-    <div class="flex justify-end m-4">
+    {{-- Filtro --}}
+    <div class="flex justify-between items-center m-4">
+        <form action="{{ route('dispositivos.index') }}" method="GET" class="flex space-x-4">
+            <select name="cliente_id" class="select select-bordered">
+                <option value="">Seleccionar Cliente</option>
+                @foreach ($clientes as $cliente)
+                    <option value="{{ $cliente->id }}" {{ request('cliente_id') == $cliente->id ? 'selected' : '' }}>
+                        {{ $cliente->nombre }}
+                    </option>
+                @endforeach
+            </select>
+            <input type="text" name="modelo" placeholder="Buscar por modelo" class="input input-bordered" value="{{ request('modelo') }}">
+            <button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
+        </form>
+
+        {{-- Botón para crear un dispositivo nuevo --}}
         <a href="{{ route('dispositivos.create') }}" class="btn btn-outline btn-sm">Nuevo Dispositivo</a>
     </div>
 
@@ -39,8 +53,7 @@
                         <td>{{ $dispositivo->cliente_id }}</td>
                         <td class="flex space-x-2">
                             <a href="{{ route('dispositivos.edit', $dispositivo->id) }}" class="btn btn-warning btn-xs">Editar</a>
-                            <form action="{{ route('dispositivos.destroy', $dispositivo->id) }}" method="POST"
-                                style="display:inline;">
+                            <form action="{{ route('dispositivos.destroy', $dispositivo->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-error btn-xs"

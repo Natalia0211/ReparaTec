@@ -11,6 +11,20 @@
         </div>
     @endif
     
+    {{-- Formulario de búsqueda --}}
+    <div class="m-4">
+        <form action="{{ route('productos.index') }}" method="GET" class="flex items-center">
+            <input type="text" name="search" placeholder="Buscar productos" class="input" />
+            <select name="categoria" class="select ml-2">
+                <option value="">Seleccione categoría</option>
+                @foreach ($categorias as $categoria)
+                    <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                @endforeach
+            </select>
+            <button type="submit" class="btn btn-outline ml-2">Buscar</button>
+        </form>
+    </div>
+
     {{-- Botón para crear un producto nuevo --}}
     <div class="flex justify-end m-4">
         <a href="{{ route('productos.create') }}" class="btn btn-outline">Nuevo producto</a>

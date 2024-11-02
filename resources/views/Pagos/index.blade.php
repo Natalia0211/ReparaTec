@@ -11,9 +11,9 @@
         </div>
     @endif
 
-    {{-- Botón para crear un nuevo pago --}}
+    {{-- Botón registrar nuevo pago --}}
     <div class="flex justify-end m-4">
-        <a href="{{ route('pagos.create') }}" class="btn btn-outline btn-sm">Nuevo Pago</a>
+        <a href="{{ route('pagos.create') }}" class="btn btn-outline btn-sm">Agregar Pago</a>
     </div>
 
     {{-- Tabla de pagos --}}
@@ -34,7 +34,7 @@
                     <tr>
                         <td>{{ $pago->id }}</td>
                         <td>{{ $pago->factura_id }}</td>
-                        <td>{{ $pago->fecha_pago->format('Y-m-d H:i:s') }}</td>
+                        <td>{{ \Carbon\Carbon::parse ($pago->fecha_pago)->format('Y-m-d H:i:s') }}</td>
                         <td>{{ $pago->metodo_pago }}</td>
                         <td>${{ number_format($pago->monto_pago, 2) }}</td>
                         <td class="flex space-x-2">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empleado;
 use App\Models\Reparacion;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,8 @@ class ReparacionController extends Controller
 
     // Mostrar el formulario para crear una nueva reparación
     public function create()
-    {
-        return view('reparacions.create');
+    {   $empleados = Empleado::all(); // Obtén todos los empleados
+        return view('reparacions.create', compact('empleados'));
     }
 
     // Almacenar una nueva reparación

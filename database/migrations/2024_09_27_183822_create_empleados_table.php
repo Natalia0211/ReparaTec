@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 45);
             $table->string('apellidos', 45);
-            $table->string('cargo', 45);
+            $table->string('cargo', 1000);
             $table->string('telefono', 45);
             $table->string('correo_electronico', 45);
             $table->timestamp('fecha_contratación');

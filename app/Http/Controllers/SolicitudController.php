@@ -12,8 +12,8 @@ class SolicitudController extends Controller
     // Método para listar todas las solicitudes
     public function index()
     {
-        $solicitudes = Solicitud::with('cliente', 'dispositivo')->get();
-        return view('solicituds.index', compact('solicitudes'));
+        $solicituds = Solicitud::with(['cliente', 'dispositivo'])->get();
+        return view('solicituds.index', compact('solicituds'));
     }
 
     // Método para mostrar el formulario de creación de una nueva solicitud

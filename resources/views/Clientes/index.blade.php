@@ -11,8 +11,13 @@
         </div>
     @endif
 
-    {{-- Botón para crear un cliente nuevo --}}
-    <div class="flex justify-end m-4">
+    {{-- Formulario de búsqueda --}}
+    <div class="flex justify-between items-center mb-4">
+        <form action="{{ route('clientes.index') }}" method="GET">
+            <input type="text" name="search" placeholder="Buscar cliente..." class="input input-bordered"
+                   value="{{ request('search') }}">
+            <button type="submit" class="btn btn-outline btn-sm">Buscar</button>
+        </form>
         <a href="{{ route('clientes.create') }}" class="btn btn-outline btn-sm">Nuevo Cliente</a>
     </div>
 
@@ -39,12 +44,11 @@
                         <td>{{ $cliente->correo_electronico }}</td>
                         <td class="flex space-x-2">
                             <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-warning btn-xs">Editar</a>
-                            <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST"
-                                style="display:inline;">
+                            <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-error btn-xs"
-                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?')">Eliminar</button>
+                                        onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?')">Eliminar</button>
                             </form>
                         </td>
                     </tr>

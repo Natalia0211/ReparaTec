@@ -10,9 +10,23 @@ class ProveedorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $proveedors = Proveedor::all();
+        $query = Proveedor::query();
+    
+        // Buscar por empresa, dirección, teléfono o correo electrónico
+        if ($request->filled('search')) {
+            $searchTerm = '%' . $request->search . '%';
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('empresa', 'like', $searchTerm)
+                  ->orWhere('direccion', 'like', $searchTerm)
+                  ->orWhere('telefono', 'like', $searchTerm)
+                  ->orWhere('correo_electronico', 'like', $searchTerm);
+            });
+        }
+    
+        $proveedors = $query->get();
+    
         return view('proveedors.index', compact('proveedors'));
     }
 

@@ -19,4 +19,9 @@ class Factura extends Model
     {
         return $this->hasMany(Pago::class, 'ID_Factura');
     }
+
+    public function reparacion()
+    {
+        return $this->hasOne(Reparacion::class, 'solicitud_id', 'solicitud_id');
+    }
 }

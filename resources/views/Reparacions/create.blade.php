@@ -19,10 +19,15 @@
                 </div>
 
                 <div>
-                    <label for="empleado_id" class="block text-sm font-medium text-gray-700">ID de Empleado</label>
-                    <input type="number" id="empleado_id" name="empleado_id" value="{{ old('empleado_id') }}"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
-                        required>
+                    <label for="empleado_id" class="block text-sm font-medium text-gray-700">Empleado</label>
+                    <select id="empleado_id" name="empleado_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
+                        <option value="">Seleccione un empleado</option>
+                        @foreach ($empleados as $empleado)
+                            <option value="{{ $empleado->id }}" {{ old('empleado_id') == $empleado->id ? 'selected' : '' }}>
+                                {{ $empleado->nombre }} <!-- Cambia 'nombre' al atributo correcto que representa el nombre del empleado -->
+                            </option>
+                        @endforeach
+                    </select>
                     @error('empleado_id')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
@@ -52,12 +57,12 @@
                     <label for="estado" class="block text-sm font-medium text-gray-700">Estado de la Reparación</label>
                     <select id="estado" name="estado" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
                         <option value="">Seleccione un estado</option>
-                        <option value="en_proceso" {{ old('estado') == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
-                        <option value="en_proceso" {{ old('estado') == 'en_progreso' ? 'selected' : '' }}>En Progreso</option>
-                        <option value="completada" {{ old('estado') == 'esperando_piezas' ? 'selected' : '' }}>Esperando Piezas</option>
-                        <option value="pendiente_repuesto" {{ old('estado') == 'prueba_de_funcionamiento' ? 'selected' : '' }}>Prueba de funcionamiento</option>
-                        <option value="pendiente_repuesto" {{ old('estado') == 'listo_para_recoger' ? 'selected' : '' }}>Listo para Recoger</option>
-                        <option value="pendiente_repuesto" {{ old('estado') == 'entregado' ? 'selected' : '' }}>Entregado</option>
+                        <option value="pendiente" {{ old('estado') == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
+                        <option value="en_proceso" {{ old('estado') == 'en_proceso' ? 'selected' : '' }}>En Progreso</option>
+                        <option value="completada" {{ old('estado') == 'completada' ? 'selected' : '' }}>Esperando Piezas</option>
+                        <option value="prueba_de_funcionamiento" {{ old('estado') == 'prueba_de_funcionamiento' ? 'selected' : '' }}>Prueba de Funcionamiento</option>
+                        <option value="listo_para_recoger" {{ old('estado') == 'listo_para_recoger' ? 'selected' : '' }}>Listo para Recoger</option>
+                        <option value="entregado" {{ old('estado') == 'entregado' ? 'selected' : '' }}>Entregado</option>
                         <option value="cancelada" {{ old('estado') == 'cancelada' ? 'selected' : '' }}>Cancelada</option>
                     </select>
                     @error('estado')
@@ -79,4 +84,3 @@
         </form>
     </div>
 @endsection
-

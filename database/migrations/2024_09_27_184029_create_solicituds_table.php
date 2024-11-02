@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('cliente_id')->constrained();
             $table->foreignId('dispositivo_id')->constrained();
             $table->timestamp('fecha_solicitud');
-            $table->string('descripción_problema', 255);
+            $table->string('descripcion_problema', 255);
+            $table->string('estado', 45);
             $table->timestamps();
         });
     }

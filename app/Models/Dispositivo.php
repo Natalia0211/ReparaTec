@@ -12,11 +12,11 @@ class Dispositivo extends Model
 
     public function cliente()
     {
-        return $this->belongsTo(Cliente::class, 'ID_Cliente');
+        return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
-    public function solicitudes()
+    public function solicituds()
     {
-        return $this->hasMany(Solicitud::class, 'ID_Dispositivo');
+        return $this->hasMany(Solicitud::class, 'dispositivo_id');
     }
 }

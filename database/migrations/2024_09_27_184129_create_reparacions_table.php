@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('empleado_id')->constrained();
             $table->dateTime('fecha_reparacion');
             $table->decimal('costo_reparacion', 10, 2);
+            $table->string('estado', 45);
             $table->timestamps();
         });
     }

@@ -11,6 +11,14 @@
         </div>
     @endif
 
+    {{-- Formulario de búsqueda --}}
+    <div class="m-4">
+        <form action="{{ route('proveedors.index') }}" method="GET" class="flex items-center">
+            <input type="text" name="search" placeholder="Buscar información específica" class="input" />
+            <button type="submit" class="btn btn-outline ml-2">Buscar</button>
+        </form>
+    </div>
+
     {{-- Botón para crear un proveedor nuevo --}}
     <div class="flex justify-end m-4">
         <a href="{{ route('proveedors.create') }}" class="btn btn-outline btn-sm">Nuevo Proveedor</a>
@@ -39,12 +47,10 @@
                         <td>{{ $proveedor->correo_electronico }}</td>
                         <td class="flex space-x-2">
                             <a href="{{ route('proveedors.edit', $proveedor->id) }}" class="btn btn-warning btn-xs">Editar</a>
-                            <form action="{{ route('proveedors.destroy', $proveedor->id) }}" method="POST"
-                                style="display:inline;">
+                            <form action="{{ route('proveedors.destroy', $proveedor->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-error btn-xs"
-                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este proveedor?')">Eliminar</button>
+                                <button type="submit" class="btn btn-error btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar este proveedor?')">Eliminar</button>
                             </form>
                         </td>
                     </tr>
@@ -53,4 +59,3 @@
         </table>
     </div>
 @endsection
-

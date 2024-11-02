@@ -11,6 +11,11 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class SolicitudFactory extends Factory
 {
+    protected $model = \App\Models\Solicitud::class;
+
+    // Define los posibles estados
+    protected array $estados = ['pendiente', 'aprobada', 'rechazada', 'en proceso'];
+    
     /**
      * Define the model's default state.
      *
@@ -22,7 +27,8 @@ class SolicitudFactory extends Factory
             'cliente_id' => Cliente::factory(), // Relaciona la solicitud con un cliente
             'dispositivo_id' => Dispositivo::factory(), // Relaciona la solicitud con un dispositivo
             'fecha_solicitud' => $this->faker->dateTimeBetween('-1 months', 'now'),
-            'descripción_problema' => $this->faker->sentence(),
+            'descripcion_problema' => $this->faker->sentence(),
+            'estado' => $this->faker->randomElement($this->estados),
         ];
     }
 }
