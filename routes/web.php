@@ -27,10 +27,6 @@ Route::resource('solicituds', SolicitudController::class);
 Route::resource('empleados', EmpleadoController::class);
 Route::resource('reparacions', ReparacionController::class);
 Route::resource('facturas', FacturaController::class);
-
-// Ruta para generar PDF
-// Cambia esto
-Route::get('facturas/{id}/pdf', [FacturaController::class, 'generatePDF'])->name('facturas.generatePDF');
 Route::resource('pagos', PagoController::class);
 
 Route::get('/dashboard', function () {

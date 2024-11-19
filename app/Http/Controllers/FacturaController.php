@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Factura;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade as PDF;
-use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 class FacturaController extends Controller
 {
@@ -63,20 +61,5 @@ class FacturaController extends Controller
         $factura->delete();
 
         return redirect()->route('facturas.index')->with('success', 'Factura eliminada exitosamente.');
-    }
-
-    // Mostrar los detalles de una factura específica
-    public function show($id)
-    {
-        $factura = Factura::findOrFail($id);
-        return view('facturas.show', compact('factura'));
-    }
-
-    // Generar PDF para imprimir o descargar la factura
-    public function generatePDF($id)
-    {
-        $factura = Factura::with(['solicitud.cliente', 'solicitud.dispositivo', 'reparacion'])->findOrFail($id);
-        $pdf = FacadePdf::loadView('facturas.pdf', compact('factura'));
-        return $pdf->download('factura_' . $factura->id . '.pdf');
     }
 }

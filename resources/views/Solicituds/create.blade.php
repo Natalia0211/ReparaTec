@@ -52,6 +52,10 @@
                     @enderror
                 </div>
             </div>
+            <label for="estado">Estado</label>
+            <select name="estado" id="estado" required>
+                <option value="pendiente">Pendiente</option>
+            </select>
 
             <div class="flex justify-end">
                 <button type="submit"

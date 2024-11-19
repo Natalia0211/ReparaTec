@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
         ]);
         
         // Crea otros modelos según sea necesario
-        \App\Models\User::factory(10)->create();
-        \App\Models\Dispositivo::factory(100)->create();
-        \App\Models\Solicitud::factory(100)->create();
-        \App\Models\Empleado::factory(100)->create();
-        \App\Models\Reparacion::factory(100)->create();
-        \App\Models\Factura::factory(100)->create();
-        \App\Models\Pago::factory(100)->create();
+        \App\Models\User::factory(1)->create();
+        \App\Models\Dispositivo::factory(1)->create();
+        \App\Models\Solicitud::factory(1)->create();
+        \App\Models\Empleado::factory(1)->create();
+        \App\Models\Reparacion::factory(1)->create();
+        \App\Models\Factura::factory(1)->create();
+        \App\Models\Pago::factory(1)->create();
     
         \App\Models\User::factory()->create([
              'name' => 'Administrador',

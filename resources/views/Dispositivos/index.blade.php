@@ -39,7 +39,7 @@
                     <th>Marca</th>
                     <th>Modelo</th>
                     <th>IMEI</th>
-                    <th>ID Cliente</th>
+                    <th>Cliente</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -50,7 +50,7 @@
                         <td>{{ $dispositivo->Marca }}</td>
                         <td>{{ $dispositivo->Modelo }}</td>
                         <td>{{ $dispositivo->IMEI }}</td>
-                        <td>{{ $dispositivo->cliente_id }}</td>
+                        <td>{{ $dispositivo->cliente->nombre }} {{ $dispositivo->cliente->apellidos }}</td>
                         <td class="flex space-x-2">
                             <a href="{{ route('dispositivos.edit', $dispositivo->id) }}" class="btn btn-warning btn-xs">Editar</a>
                             <form action="{{ route('dispositivos.destroy', $dispositivo->id) }}" method="POST" style="display:inline;">

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reparacion extends Model
 {
     use HasFactory;
-    protected $fillable = ['solicitud_id', 'empleado_id', 'fecha_reparacion', 'costo_reparacion'];
+    protected $fillable = ['solicitud_id', 'empleado_id', 'fecha_reparacion', 'costo_reparacion','estado'];
     
     public function solicitud()
     {

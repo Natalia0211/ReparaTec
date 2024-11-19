@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('cargo', 1000);
             $table->string('telefono', 45);
             $table->string('correo_electronico', 45);
-            $table->timestamp('fecha_contratación');
+            $table->timestamp('fecha_contratacion');
             $table->timestamps();
         });
     }
