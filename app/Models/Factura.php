@@ -12,16 +12,11 @@ class Factura extends Model
 
     public function solicitud()
     {
-        return $this->belongsTo(Solicitud::class, 'ID_Solicitud');
+        return $this->belongsTo(Solicitud::class);
     }
 
     public function pagos()
     {
-        return $this->hasMany(Pago::class, 'ID_Factura');
-    }
-
-    public function reparacion()
-    {
-        return $this->hasOne(Reparacion::class, 'solicitud_id', 'solicitud_id');
+        return $this->hasMany(Pago::class);
     }
 }

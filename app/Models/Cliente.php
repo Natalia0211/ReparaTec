@@ -15,7 +15,7 @@ class Cliente extends Model
         return $this->hasMany(Dispositivo::class, 'cliente_id');
     }
 
-    public function solicitudes()
+    public function solicituds()
     {
         return $this->hasMany(Solicitud::class, 'cliente_id');
     }

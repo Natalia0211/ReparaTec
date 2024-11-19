@@ -12,10 +12,11 @@ class Reparacion extends Model
     
     public function solicitud()
     {
-        return $this->belongsTo(Solicitud::class, 'solicitud_id');
+        return $this->belongsTo(Solicitud::class);
     }
+
     public function empleado()
     {
-        return $this->belongsTo(Empleado::class, 'empleado_id');
+        return $this->belongsTo(Empleado::class);
     }
 }

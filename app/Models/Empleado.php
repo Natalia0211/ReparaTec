@@ -10,8 +10,8 @@ class Empleado extends Model
     use HasFactory;
     protected $fillable = ['nombre', 'apellidos', 'cargo', 'telefono', 'correo_electronico' , 'fecha_contratacion'];
     
-    public function reparaciones()
+    public function reparacions()
     {
-        return $this->hasMany(Reparacion::class, 'ID_Empleado');
+        return $this->hasMany(Reparacion::class, 'empleado_id');
     }
 }

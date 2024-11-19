@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Factura;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class FacturaController extends Controller
 {
@@ -33,6 +34,28 @@ class FacturaController extends Controller
         Factura::create($request->all());
 
         return redirect()->route('facturas.index')->with('success', 'Factura creada exitosamente.');
+    }
+
+    // Mostrar detalles de una factura específica
+    public function show($id)
+    {
+        // Cargar factura con sus relaciones
+        $factura = Factura::with(['solicitud.cliente', 'solicitud.dispositivo','solicitud.reparacion'])->findOrFail($id);
+        
+        return view('facturas.show', compact('factura'));
+    }
+
+    // Método para generar el PDF de una factura
+    public function generatePDF($id)
+    {
+        // Cargar la factura con sus relaciones
+        $factura = Factura::with(['solicitud', 'reparacion'])->findOrFail($id);
+
+        // Generar el PDF utilizando la vista 'facturas.pdf'
+        $pdf = Pdf::loadView('facturas.pdf', compact('factura'));
+
+        // Descargar el PDF
+        return $pdf->download('factura_' . $factura->id . '.pdf');
     }
 
     // Mostrar el formulario para editar una factura específica

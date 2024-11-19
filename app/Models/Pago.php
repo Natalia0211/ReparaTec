@@ -12,6 +12,6 @@ class Pago extends Model
 
     public function factura()
     {
-        return $this->belongsTo(Factura::class, 'ID_Factura');
+        return $this->belongsTo(Factura::class);
     }
 }

@@ -12,21 +12,21 @@ class Solicitud extends Model
 
     public function cliente()
     {
-        return $this->belongsTo(Cliente::class, 'cliente_id');
+        return $this->belongsTo(Cliente::class);
     }
 
     public function dispositivo()
     {
-        return $this->belongsTo(Dispositivo::class, 'dispositivo_id');
+        return $this->belongsTo(Dispositivo::class);
     }
 
-    public function reparaciones()
+    public function reparacion()
     {
-        return $this->hasMany(Reparacion::class, 'solicitud_id');
+        return $this->hasOne(Reparacion::class);
     }
 
     public function factura()
     {
-        return $this->hasOne(Factura::class, 'solicitud_id');
+        return $this->hasOne(Factura::class);
     }
 }

@@ -39,6 +39,7 @@
                         <td>{{ $factura->estado }}</td>
                         <td class="flex space-x-2">
                             <a href="{{ route('facturas.show', $factura->id) }}" class="btn btn-info btn-xs">Detalles</a>
+                            <a href="{{ route('facturas.pdf', $factura->id) }}" class="btn btn-primary btn-xs">Generar PDF</a>
                             <a href="{{ route('facturas.edit', $factura->id) }}" class="btn btn-warning btn-xs">Editar</a>
                             <form action="{{ route('facturas.destroy', $factura->id) }}" method="POST" style="display:inline;">
                                 @csrf

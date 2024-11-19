@@ -29,6 +29,8 @@ Route::resource('reparacions', ReparacionController::class);
 Route::resource('facturas', FacturaController::class);
 Route::resource('pagos', PagoController::class);
 
+Route::get('facturas/{id}/pdf', [FacturaController::class, 'generatePDF'])->name('facturas.pdf');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
