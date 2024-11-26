@@ -19,9 +19,9 @@ class InventarioController extends Controller
     // Método para mostrar el formulario de creación de un nuevo inventario
     public function create()
     {
-        $proveedores = Proveedor::all();
+        $proveedors = Proveedor::all();
         $productos = Producto::all();
-        return view('inventarios.create', compact('proveedores', 'productos'));
+        return view('inventarios.create', compact('proveedors', 'productos'));
     }
 
     // Método para almacenar un nuevo inventario
@@ -42,9 +42,9 @@ class InventarioController extends Controller
     // Método para mostrar el formulario de edición de un inventario
     public function edit(Inventario $inventario)
     {
-        $proveedores = Proveedor::all();
+        $proveedors = Proveedor::all();
         $productos = Producto::all();
-        return view('inventarios.edit', compact('inventario', 'proveedores', 'productos'));
+        return view('inventarios.edit', compact('inventario', 'proveedors', 'productos'));
     }
 
     // Método para actualizar un inventario existente

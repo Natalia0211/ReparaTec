@@ -2,8 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Proveedor;
 use Illuminate\Database\Seeder;
+use App\Models\Categoria;
+use App\Models\Proveedor;
+use App\Models\Producto;
+use App\Models\Cliente;
+use App\Models\Dispositivo;
+use App\Models\Solicitud;
+use App\Models\Empleado;
+use App\Models\Reparacion;
+use App\Models\Factura;
+use App\Models\Pago;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,27 +21,59 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Primero, crea los proveedores y categorías
-        $proveedores = Proveedor::factory(100)->create();
-        \App\Models\Categoria::factory(10)->create();
+        // Crear categorías
+        $categorias = Categoria::factory(10)->create();
         
-        // Luego, crea los productos, asegurando que haya proveedores y categorías disponibles
-        \App\Models\Producto::factory(100)->create([
-            'proveedor_id' => $proveedores->random()->id, // Asigna un proveedor aleatorio
-        ]);
+        // Crear proveedores
+        $proveedores = Proveedor::factory(10)->create();
         
-        // Crea otros modelos según sea necesario
-        \App\Models\User::factory(1)->create();
-        \App\Models\Dispositivo::factory(1)->create();
-        \App\Models\Solicitud::factory(1)->create();
-        \App\Models\Empleado::factory(1)->create();
-        \App\Models\Reparacion::factory(1)->create();
-        \App\Models\Factura::factory(1)->create();
-        \App\Models\Pago::factory(1)->create();
-    
+        // Crear productos asociados a categorías y proveedores
+        foreach ($proveedores as $proveedor) {
+            Producto::factory(10)->create([
+                'proveedor_id' => $proveedor->id,
+                'categoria_id' => $categorias->random()->id,
+            ]);
+        }
+        
+        // Crear clientes
+        $clientes = Cliente::factory(100)->create();
+
+        // Crear empleados
+        $empleados = Empleado::factory(5)->create();
+        
+        // Asociar dispositivos a clientes
+        foreach ($clientes as $cliente) {
+            $dispositivo = Dispositivo::factory()->create([
+                'cliente_id' => $cliente->id,
+            ]);
+
+            // Crear solicitudes asociadas al cliente y su dispositivo
+            $solicitud = Solicitud::factory()->create([
+                'cliente_id' => $cliente->id,
+                'dispositivo_id' => $dispositivo->id,
+            ]);
+
+            // Crear reparaciones asociadas a la solicitud y un empleado
+            $reparacion = Reparacion::factory()->create([
+                'solicitud_id' => $solicitud->id,
+                'empleado_id' => $empleados->random()->id,
+            ]);
+
+            // Crear facturas asociadas a la solicitud
+            $factura = Factura::factory()->create([
+                'solicitud_id' => $solicitud->id,
+            ]);
+
+            // Crear pagos asociados a la factura
+            Pago::factory()->create([
+                'factura_id' => $factura->id,
+            ]);
+        }
+
+        // Crear un usuario administrador
         \App\Models\User::factory()->create([
-             'name' => 'Administrador',
-             'email' => 'admin@email.com',
-         ]);
+            'name' => 'Administrador',
+            'email' => 'admin@email.com',
+        ]);
     }
 }

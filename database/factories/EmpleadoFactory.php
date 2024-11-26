@@ -22,7 +22,7 @@ class EmpleadoFactory extends Factory
             'cargo' => $this->faker->jobTitle,
             'telefono' => $this->faker->phoneNumber,
             'correo_electronico' => $this->faker->unique()->safeEmail,
-            'fecha_contratación' => $this->faker->dateTimeBetween('-5 years', 'now'),
+            'fecha_contratacion' => $this->faker->dateTimeBetween('-5 years', 'now'),
         ];
     }
 }
