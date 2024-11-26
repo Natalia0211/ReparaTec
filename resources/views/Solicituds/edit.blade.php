@@ -10,33 +10,23 @@
             @method('PUT') <!-- Indica que el método del formulario es PUT -->
 
             <div class="grid gap-6 mb-6 md:grid-cols-2">
-                <!-- Campo Cliente -->
+                <!-- Campo Cliente (Solo visualización) -->
                 <div>
                     <label for="cliente_id" class="block text-sm font-medium text-gray-700">Cliente</label>
-                    <select id="cliente_id" name="cliente_id" required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-                        @foreach($clientes as $cliente)
-                            <option value="{{ $cliente->id }}" {{ $solicitud->cliente_id == $cliente->id ? 'selected' : '' }}>
-                                {{ $cliente->nombre }} {{ $cliente->apellidos }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <input type="text" id="cliente_id" value="{{ $solicitud->cliente->nombre }} {{ $solicitud->cliente->apellidos }}" 
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" 
+                        disabled>
                     @error('cliente_id')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <!-- Campo Dispositivo -->
+                <!-- Campo Dispositivo (Solo visualización) -->
                 <div>
                     <label for="dispositivo_id" class="block text-sm font-medium text-gray-700">Dispositivo</label>
-                    <select id="dispositivo_id" name="dispositivo_id" required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
-                        @foreach($dispositivos as $dispositivo)
-                            <option value="{{ $dispositivo->id }}" {{ $solicitud->dispositivo_id == $dispositivo->id ? 'selected' : '' }}>
-                                {{ $dispositivo->marca }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <input type="text" id="dispositivo_id" value="{{ $solicitud->dispositivo->Marca }} {{ $solicitud->dispositivo->Modelo }}" 
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" 
+                        disabled>
                     @error('dispositivo_id')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror

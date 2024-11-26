@@ -49,7 +49,7 @@ class FacturaController extends Controller
     public function generatePDF($id)
     {
         // Cargar la factura con sus relaciones
-        $factura = Factura::with(['solicitud', 'reparacion'])->findOrFail($id);
+        $factura = Factura::with(['solicitud', 'solicitud.reparacion'])->findOrFail($id);
 
         // Generar el PDF utilizando la vista 'facturas.pdf'
         $pdf = Pdf::loadView('facturas.pdf', compact('factura'));

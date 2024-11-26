@@ -43,7 +43,7 @@ class SolicitudController extends Controller
     public function edit(Solicitud $solicitud)
     {
         $clientes = Cliente::all();
-        $dispositivos = Dispositivo::all();
+        $dispositivos = $solicitud->cliente->dispositivos;
         return view('solicituds.edit', compact('solicitud', 'clientes', 'dispositivos'));
     }
 
