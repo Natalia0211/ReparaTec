@@ -22,7 +22,8 @@ class ProductoFactory extends Factory
         return [
             'nombre' => fake()->word(),
             'descripcion' => fake()->text(),
-            'precio' => fake()->numberBetween(10000, 500000),
+            'precio' => fake()->numberBetween(10000, 50000),
+            'cantidad' => fake()->numberBetween(1, 100),
             'categoria_id' => Categoria::inRandomOrder()->first()->id, // Asigna un id de categoría
             'proveedor_id' => Proveedor::factory(),
         ];

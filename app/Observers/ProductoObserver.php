@@ -14,7 +14,7 @@ class ProductoObserver
     {
         Inventario::create([
             'producto_id' => $producto->id,
-            'cantidad' => 0, // Puedes inicializar la cantidad en 0 o el valor que prefieras
+            'cantidad' => $producto->cantidad,
             'precio_unitario' => $producto->precio, // Asignamos el precio del producto
             'proveedor_id' => $producto->proveedor_id,
         ]);

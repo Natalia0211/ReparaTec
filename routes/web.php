@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutenticaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
@@ -15,7 +16,7 @@ use App\Http\Controllers\ReparacionController;
 use App\Http\Controllers\SolicitudController;
 
 // Rutas web
-Route::view('/', 'welcome')->name('home');
+Route::view('/','inicio')->name('inicio');
 
 Route::resource('proveedors', ProveedorController::class);
 Route::resource('categorias', CategoriaController::class);
@@ -30,6 +31,27 @@ Route::resource('facturas', FacturaController::class);
 Route::resource('pagos', PagoController::class);
 
 Route::get('facturas/{id}/pdf', [FacturaController::class, 'generatePDF'])->name('facturas.pdf');
+
+//Ruta de registro de usuarios
+route::view('/registro', 'autenticacion.registro')->name('registro');
+route::post('/registro', [AutenticaController::class, 'registro'])->name('registro.store');
+
+//Ruta de login de usuarios
+route::view('/login', 'autenticacion.login')->name('login');
+route::post('/login', [AutenticaController::class, 'login'])->name('login.store');
+
+//Ruta de logout del usuario
+route::post('/logout', [AutenticaController::class, 'logout'])->name('logout');
+
+//Ruta para editar el perfil de usuario
+Route::get('/perfil', [AutenticaController::class, 'perfil'])->name('perfil');
+Route::put('/perfil/{user}', [AutenticaController::class, 'perfilUpdate'])->name('perfil.update');
+
+//Ruta para cambiar la contraseña de usuario
+Route::put('/perfil/password/{user}', [AutenticaController::class, 'passwordUpdate'])->name('password.update');
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
