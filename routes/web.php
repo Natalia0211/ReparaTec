@@ -18,42 +18,47 @@ use App\Http\Controllers\SolicitudController;
 // Rutas web
 Route::view('/','inicio')->name('inicio');
 
-Route::resource('proveedors', ProveedorController::class);
-Route::resource('categorias', CategoriaController::class);
-Route::resource('productos', ProductoController::class)->middleware('auth');
-Route::resource('inventarios', InventarioController::class);
-Route::resource('clientes', ClienteController::class);
-Route::resource('dispositivos', DispositivoController::class);
-Route::resource('solicituds', SolicitudController::class);
-Route::resource('empleados', EmpleadoController::class);
-Route::resource('reparacions', ReparacionController::class);
-Route::resource('facturas', FacturaController::class);
-Route::resource('pagos', PagoController::class);
+// Rutas accesibles solo para administradores
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('proveedors', ProveedorController::class);
+    Route::resource('categorias', CategoriaController::class);
+    Route::resource('empleados', EmpleadoController::class);
+    Route::resource('reparacions', ReparacionController::class);
+    Route::resource('facturas', FacturaController::class);
+    Route::resource('clientes', ClienteController::class);
+    Route::resource('inventarios', InventarioController::class);
+});
 
-Route::get('facturas/{id}/pdf', [FacturaController::class, 'generatePDF'])->name('facturas.pdf');
+// Rutas accesibles para todos los usuarios autenticados (tanto admins como usuarios estándar)
+Route::middleware('auth')->group(function () {
+    Route::resource('productos', ProductoController::class);
+    Route::resource('dispositivos', DispositivoController::class);
+    Route::resource('solicituds', SolicitudController::class);
+    Route::resource('pagos', PagoController::class);
 
-//Ruta de registro de usuarios
-route::view('/registro', 'autenticacion.registro')->name('registro');
-route::post('/registro', [AutenticaController::class, 'registro'])->name('registro.store');
+    Route::get('facturas/{id}/pdf', [FacturaController::class, 'generatePDF'])->name('facturas.pdf');
+});
 
-//Ruta de login de usuarios
-route::view('/login', 'autenticacion.login')->name('login');
-route::post('/login', [AutenticaController::class, 'login'])->name('login.store');
+// Rutas para el registro, login y logout (sin necesidad de autenticación)
+Route::view('/registro', 'autenticacion.registro')->name('registro');
+Route::post('/registro', [AutenticaController::class, 'registro'])->name('registro.store');
+Route::view('/login', 'autenticacion.login')->name('login');
+Route::post('/login', [AutenticaController::class, 'login'])->name('login.store');
+Route::post('/logout', [AutenticaController::class, 'logout'])->name('logout');
 
-//Ruta de logout del usuario
-route::post('/logout', [AutenticaController::class, 'logout'])->name('logout');
+// Rutas de perfil y cambio de contraseña (solo para usuarios autenticados)
+Route::middleware('auth')->group(function () {
+    Route::get('/perfil', [AutenticaController::class, 'perfil'])->name('perfil');
+    Route::put('/perfil/{user}', [AutenticaController::class, 'perfilUpdate'])->name('perfil.update');
+    Route::put('/perfil/password/{user}', [AutenticaController::class, 'passwordUpdate'])->name('password.update');
+});
 
-//Ruta para editar el perfil de usuario
-Route::get('/perfil', [AutenticaController::class, 'perfil'])->name('perfil');
-Route::put('/perfil/{user}', [AutenticaController::class, 'perfilUpdate'])->name('perfil.update');
-
-//Ruta para cambiar la contraseña de usuario
-Route::put('/perfil/password/{user}', [AutenticaController::class, 'passwordUpdate'])->name('password.update');
-
+// Ruta de dashboard (requerida para usuarios autenticados)
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Rutas relacionadas con el perfil de usuario (opcional)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
