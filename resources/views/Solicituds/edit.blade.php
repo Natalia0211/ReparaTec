@@ -53,17 +53,33 @@
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <!-- Campo Estado -->
+                <div>
+                    <label for="estado" class="block text-sm font-medium text-gray-700">Estado</label>
+                    <select id="estado" name="estado" 
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" 
+                        required>
+                        <option value="pendiente" {{ old('estado', $solicitud->estado) == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
+                        <option value="en_proceso" {{ old('estado', $solicitud->estado) == 'en_proceso' ? 'selected' : '' }}>En Proceso</option>
+                        <option value="resuelto" {{ old('estado', $solicitud->estado) == 'resuelto' ? 'selected' : '' }}>Resuelto</option>
+                    </select>
+                    @error('estado')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
             </div>
 
             <!-- Botones de Guardar y Cancelar -->
-            <div class="flex justify-end">
+            <div class="flex justify-end mt-4">
                 <button type="submit"
                     class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Guardar
+                    <i class="fas fa-save mr-2"></i> Guardar
                 </button>
                 <a href="{{ route('solicituds.index') }}"
                     class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                    Cancelar
+                    <i class="fas fa-times mr-2"></i> Cancelar
                 </a>
             </div>
         </form>

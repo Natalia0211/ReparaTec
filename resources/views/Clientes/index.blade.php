@@ -43,12 +43,20 @@
                         <td>{{ $cliente->telefono }}</td>
                         <td>{{ $cliente->correo_electronico }}</td>
                         <td class="flex space-x-2">
-                            <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-warning btn-xs">Editar</a>
-                            <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST" style="display:inline;">
+                            <!-- Botón Editar con ícono -->
+                            <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-warning btn-xs">
+                                <i class="fas fa-edit"></i> <!-- Ícono de editar -->
+                            </a>
+
+                            <!-- Botón Eliminar con ícono -->
+                            <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST"
+                                style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-error btn-xs"
-                                        onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?')">Eliminar</button>
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?')">
+                                    <i class="fas fa-trash-alt"></i> <!-- Ícono de eliminar -->
+                                </button>
                             </form>
                         </td>
                     </tr>

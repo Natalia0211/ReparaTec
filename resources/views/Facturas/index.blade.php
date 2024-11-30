@@ -38,14 +38,22 @@
                         <td>{{ number_format($factura->monto_total, 2) }}</td>
                         <td>{{ $factura->estado }}</td>
                         <td class="flex space-x-2">
-                            <a href="{{ route('facturas.show', $factura->id) }}" class="btn btn-info btn-xs">Detalles</a>
+                            <!-- Botón Generar PDF con texto -->
                             <a href="{{ route('facturas.pdf', $factura->id) }}" class="btn btn-primary btn-xs">Generar PDF</a>
-                            <a href="{{ route('facturas.edit', $factura->id) }}" class="btn btn-warning btn-xs">Editar</a>
+
+                            <!-- Botón Editar con ícono -->
+                            <a href="{{ route('facturas.edit', $factura->id) }}" class="btn btn-warning btn-xs">
+                                <i class="fas fa-edit"></i> <!-- Ícono de editar -->
+                            </a>
+
+                            <!-- Botón Eliminar con ícono -->
                             <form action="{{ route('facturas.destroy', $factura->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-error btn-xs"
-                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta factura?')">Eliminar</button>
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta factura?')">
+                                    <i class="fas fa-trash-alt"></i> <!-- Ícono de eliminar -->
+                                </button>
                             </form>
                         </td>
                     </tr>

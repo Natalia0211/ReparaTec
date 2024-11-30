@@ -46,11 +46,18 @@
                         <td>{{ $proveedor->telefono }}</td>
                         <td>{{ $proveedor->correo_electronico }}</td>
                         <td class="flex space-x-2">
-                            <a href="{{ route('proveedors.edit', $proveedor->id) }}" class="btn btn-warning btn-xs">Editar</a>
+                            <!-- Botón Editar con ícono -->
+                            <a href="{{ route('proveedors.edit', $proveedor->id) }}" class="btn btn-warning btn-xs">
+                                <i class="fas fa-edit"></i> <!-- Ícono de editar -->
+                            </a>
+
+                            <!-- Botón Eliminar con ícono -->
                             <form action="{{ route('proveedors.destroy', $proveedor->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-error btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar este proveedor?')">Eliminar</button>
+                                <button type="submit" class="btn btn-error btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar este proveedor?')">
+                                    <i class="fas fa-trash-alt"></i> <!-- Ícono de eliminar -->
+                                </button>
                             </form>
                         </td>
                     </tr>

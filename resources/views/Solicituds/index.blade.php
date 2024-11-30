@@ -40,11 +40,18 @@
                         <td>{{ $solicitud->descripcion_problema }}</td> <!-- Mostrar descripción del problema -->
                         <td>{{ $solicitud->estado }}</td>
                         <td class="flex space-x-2">
-                            <a href="{{ route('solicituds.edit', $solicitud->id) }}" class="btn btn-warning btn-xs">Editar</a>
+                            <!-- Botón Editar con ícono -->
+                            <a href="{{ route('solicituds.edit', $solicitud->id) }}" class="btn btn-warning btn-xs">
+                                <i class="fas fa-edit"></i> <!-- Ícono de editar -->
+                            </a>
+
+                            <!-- Botón Eliminar con ícono -->
                             <form action="{{ route('solicituds.destroy', $solicitud->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-error btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar esta solicitud?')">Eliminar</button>
+                                <button type="submit" class="btn btn-error btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar esta solicitud?')">
+                                    <i class="fas fa-trash-alt"></i> <!-- Ícono de eliminar -->
+                                </button>
                             </form>
                         </td>
                     </tr>

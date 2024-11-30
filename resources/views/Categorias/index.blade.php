@@ -34,13 +34,20 @@
                         <td>{{ $categoria->nombre }}</td>
                         <td>{{ $categoria->descripcion }}</td>
                         <td class="flex space-x-2">
-                            <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-warning btn-xs">Editar</a>
+                            <!-- Botón Editar con ícono -->
+                            <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-warning btn-xs">
+                                <i class="fas fa-edit"></i> <!-- Ícono de editar -->
+                            </a>
+
+                            <!-- Botón Eliminar con ícono -->
                             <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST"
                                 style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-error btn-xs"
-                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?')">Eliminar</button>
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?')">
+                                    <i class="fas fa-trash-alt"></i> <!-- Ícono de eliminar -->
+                                </button>
                             </form>
                         </td>
                     </tr>

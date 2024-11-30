@@ -50,11 +50,20 @@
                         <td>{{ $empleado->telefono }}</td>
                         <td>{{ $empleado->correo_electronico }}</td>
                         <td class="flex space-x-2">
-                            <a href="{{ route('empleados.edit', $empleado->id) }}" class="btn btn-warning btn-xs">Editar</a>
-                            <form action="{{ route('empleados.destroy', $empleado->id) }}" method="POST" style="display:inline;">
+                            <!-- Botón Editar con ícono -->
+                            <a href="{{ route('empleados.edit', $empleado->id) }}" class="btn btn-warning btn-xs">
+                                <i class="fas fa-edit"></i> <!-- Ícono de editar -->
+                            </a>
+
+                            <!-- Botón Eliminar con ícono -->
+                            <form action="{{ route('empleados.destroy', $empleado->id) }}" method="POST"
+                                style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-error btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?')">Eliminar</button>
+                                <button type="submit" class="btn btn-error btn-xs"
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este dispositivo?')">
+                                    <i class="fas fa-trash-alt"></i> <!-- Ícono de eliminar -->
+                                </button>
                             </form>
                         </td>
                     </tr>

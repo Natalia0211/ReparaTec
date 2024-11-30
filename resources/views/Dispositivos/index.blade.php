@@ -52,12 +52,20 @@
                         <td>{{ $dispositivo->IMEI }}</td>
                         <td>{{ $dispositivo->cliente->nombre }} {{ $dispositivo->cliente->apellidos }}</td>
                         <td class="flex space-x-2">
-                            <a href="{{ route('dispositivos.edit', $dispositivo->id) }}" class="btn btn-warning btn-xs">Editar</a>
-                            <form action="{{ route('dispositivos.destroy', $dispositivo->id) }}" method="POST" style="display:inline;">
+                            <!-- Botón Editar con ícono -->
+                            <a href="{{ route('dispositivos.edit', $dispositivo->id) }}" class="btn btn-warning btn-xs">
+                                <i class="fas fa-edit"></i> <!-- Ícono de editar -->
+                            </a>
+
+                            <!-- Botón Eliminar con ícono -->
+                            <form action="{{ route('dispositivos.destroy', $dispositivo->id) }}" method="POST"
+                                style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-error btn-xs"
-                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este dispositivo?')">Eliminar</button>
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este dispositivo?')">
+                                    <i class="fas fa-trash-alt"></i> <!-- Ícono de eliminar -->
+                                </button>
                             </form>
                         </td>
                     </tr>

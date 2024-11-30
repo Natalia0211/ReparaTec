@@ -38,12 +38,18 @@
                         <td>{{ $pago->metodo_pago }}</td>
                         <td>${{ number_format($pago->monto_pago, 2) }}</td>
                         <td class="flex space-x-2">
-                            <a href="{{ route('pagos.edit', $pago->id) }}" class="btn btn-warning btn-xs">Editar</a>
+                            <!-- Botón Editar con ícono -->
+                            <a href="{{ route('pagos.edit', $pago->id) }}" class="btn btn-warning btn-xs">
+                                <i class="fas fa-edit"></i> <!-- Ícono de editar -->
+                            </a>
+
+                            <!-- Botón Eliminar con ícono -->
                             <form action="{{ route('pagos.destroy', $pago->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-error btn-xs"
-                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este pago?')">Eliminar</button>
+                                <button type="submit" class="btn btn-error btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar este pago?')">
+                                    <i class="fas fa-trash-alt"></i> <!-- Ícono de eliminar -->
+                                </button>
                             </form>
                         </td>
                     </tr>

@@ -34,11 +34,18 @@
                             <td>{{ $inventario->precio_unitario }}</td>
                             <td>{{ $inventario->proveedor ? $inventario->proveedor->empresa : '' }}</td>
                             <td class="flex space-x-2">
-                                <a href="{{ route('inventarios.edit', $inventario->id) }}" class="btn btn-warning btn-xs">Editar</a>
+                                <!-- Botón Editar con ícono -->
+                                <a href="{{ route('inventarios.edit', $inventario->id) }}" class="btn btn-warning btn-xs">
+                                    <i class="fas fa-edit"></i> <!-- Ícono de editar -->
+                                </a>
+
+                                <!-- Botón Eliminar con ícono -->
                                 <form action="{{ route('inventarios.destroy', $inventario->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-error btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar este inventario?')">Eliminar</button>
+                                    <button type="submit" class="btn btn-error btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar este inventario?')">
+                                        <i class="fas fa-trash-alt"></i> <!-- Ícono de eliminar -->
+                                    </button>
                                 </form>
                             </td>
                         </tr>

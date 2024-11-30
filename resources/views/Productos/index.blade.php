@@ -42,12 +42,20 @@
                     <h2 class="card-title">{{ $producto->nombre }}</h2>
                     <p>{{ $producto->descripcion }}</p>
                     Precio: <div class="badge badge-outline">{{ $producto->precio }}</div>
+                    <p>Stock: <div class="badge badge-secondary">{{ $producto->cantidad }}</div></p> <!-- Mostrar stock -->
                     <div class="card-actions justify-end mt-4 flex space-x-2">
-                        <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-warning btn-xs">Editar</a>
+                        <!-- Botón Editar con ícono -->
+                        <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-warning btn-xs">
+                            <i class="fas fa-edit"></i> <!-- Ícono de editar -->
+                        </a>
+
+                        <!-- Botón Eliminar con ícono -->
                         <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-error btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?')">Eliminar</button>
+                            <button type="submit" class="btn btn-error btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?')">
+                                <i class="fas fa-trash-alt"></i> <!-- Ícono de eliminar -->
+                            </button>
                         </form>
                     </div>
                 </div>
