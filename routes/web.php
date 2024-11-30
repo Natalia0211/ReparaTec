@@ -50,9 +50,6 @@ Route::put('/perfil/{user}', [AutenticaController::class, 'perfilUpdate'])->name
 //Ruta para cambiar la contraseña de usuario
 Route::put('/perfil/password/{user}', [AutenticaController::class, 'passwordUpdate'])->name('password.update');
 
-
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

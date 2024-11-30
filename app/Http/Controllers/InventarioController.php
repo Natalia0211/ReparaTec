@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class InventarioController extends Controller
 {
+        //Protegemos las rutas de este controlador con el middleware auth y admin (autenticado y rol de admin)
+        public function __construct()
+        {
+            //Sólo los usuarios autenticados y con rol de admin pueden acceder a todos los métodos de este controlador
+            $this->middleware('auth');
+            $this->middleware('admin')->except('index');
+        }
+    
     // Método para mostrar la lista de inventarios
     public function index()
     {
